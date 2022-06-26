@@ -1,0 +1,19 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 2 versions", "safari >= 7"]
+        }
+      }
+    ],
+    "react",
+    "stage-2"
+  ],
+  "plugins": [
+    "transform-react-inline-elements",
+    "transform-react-constant-elements"
+  ],
+  "ignore": ["node_modules", "build", "dist"]
+}

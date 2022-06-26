@@ -1,0 +1,24 @@
+{
+  "include": ["src/utils"],
+  "compileOnSave": true,
+  "compilerOptions": {
+    "pretty": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "downlevelIteration": true,
+    "lib": ["dom", "es2015"],
+    "jsx": "react",
+    "moduleResolution": "node",
+    "newLine": "LF",
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "strictNullChecks": true,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "declaration": true,
+    "declarationDir": "lib/typings",
+    "outDir": "lib"
+  }
+}

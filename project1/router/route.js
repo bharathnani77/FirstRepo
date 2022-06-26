@@ -4,23 +4,24 @@ const authorController = require("../controller/authorController")
 const blogscontroller = require("../controller/bloggercontroller")
 const middleware = require("../middleware/middleware")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+
 
 router.post("/authors",authorController.createAuthor)
 
-router.post("/blogs", middleware.authentification,middleware.autherisation, blogscontroller.createBlogs)
+router.post("/loginauthor",authorController.loginAuthor)
 
-router.get("/blogs", middleware.authentification,middleware.autherisation, blogscontroller.getallblogs)
+ router.post("/blogs",blogscontroller.createBlog)
 
-router.get("/specificblogs", middleware.authentification,middleware.autherisation, blogscontroller.getByFilter)
+router.get("/getblogs",middleware.authentication,blogscontroller.getBlogs)
 
-router.put("/blogs/:blogId", middleware.authentification,middleware.autherisation, blogscontroller.updateBlog)
+// router.get("/specificblogs", middleware.authentication,middleware.authorisation, blogscontroller.getByFilter)
 
-router.put("/updatingpublisher", middleware.authentification,middleware.autherisation, blogscontroller.updatingpublisherwithdate)
+router.put("/blogs/:blogId", middleware.authentication,middleware.authorisation, blogscontroller.updateBlog)
 
-router.get("/blogs/:blogId", middleware.authentification,middleware.autherisation, blogscontroller.deleteBlogsById)
+// router.put("/updatingpublisher", middleware.authentication,middleware.authorisation, blogscontroller.updatingpublisherwithdate)
 
-router.get("//blogs?queryParams", middleware.authentification,middleware.autherisation, blogscontroller.deleteBlogByQuerConditoin)
+router.delete("/deleteblogs/:blogId", middleware.authentication,middleware.authorisation, blogscontroller.deleteBlogsById)
+
+router.delete("/delete", middleware.authentication,middleware.authorisation, blogscontroller.deleteBlogByQuerCondition)
+
 module.exports = router

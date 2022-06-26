@@ -1,6 +1,13 @@
 const jwt = require("jsonwebtoken");
 
-const authentification = async function (req, res, next) {
+// ### Authentication
+// - Add an authorisation implementation for the JWT token that validates the token before every protected endpoint is called. If the validation fails, return a suitable error message with a corresponding HTTP status code
+// - Protected routes are create a blog, edit a blog, get the list of blogs, delete a blog(s)
+// - Set the token, once validated, in the request - `x-api-key`
+// - Use a middleware for authentication purpose.
+
+
+const authentication = async function (req, res, next) {
     let token = req.headers["x-api-key"];
     if (!token) return res.status(404).send({ status: false, msg: "token must be present" });
     let decodedToken = jwt.verify(token, "projectOne");
@@ -8,7 +15,11 @@ const authentification = async function (req, res, next) {
     next()
 }
 
-const autherisation = async function (req, res, next) {
+// ### Authorisation
+// - Make sure that only the owner of the blogs is able to edit or delete the blog.
+// - In case of unauthorized access return an appropirate error message.
+
+const authorisation = async function (req, res, next) {
     let token = req.headers["x-auth-token"];
     let decodedToken = jwt.verify(token, "projectOne");
     let userToBeModified = req.params.userId
@@ -17,5 +28,5 @@ const autherisation = async function (req, res, next) {
     next()
 }
 
-module.exports.authentification = authentification
-module.exports.autherisation = autherisation
+module.exports.authentication = authentication
+module.exports.authorisation = authorisation
