@@ -5,12 +5,13 @@ const blogscontroller = require("../controller/bloggercontroller")
 const middleware = require("../middleware/middleware")
 
 
+//Author routes
+router.post("/authors",authorController.registerAuthor)
 
-router.post("/authors",authorController.createAuthor)
+router.post("/login",authorController.loginAuthor)
+//Blog routes
 
-router.post("/loginauthor",authorController.loginAuthor)
-
- router.post("/blogs",blogscontroller.createBlog)
+ router.post("/blogs",middleware.authentication,blogscontroller.createBlog)
 
 router.get("/getblogs",middleware.authentication,blogscontroller.getBlogs)
 
@@ -20,7 +21,7 @@ router.put("/blogs/:blogId", middleware.authentication,middleware.authorisation,
 
 // router.put("/updatingpublisher", middleware.authentication,middleware.authorisation, blogscontroller.updatingpublisherwithdate)
 
-router.delete("/deleteblogs/:blogId", middleware.authentication,middleware.authorisation, blogscontroller.deleteBlogsById)
+router.delete("/deleteblogs/:blogId", blogscontroller.deleteBlogsById)
 
 router.delete("/delete", middleware.authentication,middleware.authorisation, blogscontroller.deleteBlogByQuerCondition)
 
